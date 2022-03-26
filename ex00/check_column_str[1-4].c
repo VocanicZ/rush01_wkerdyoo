@@ -1,0 +1,1 @@
+//check if str[1-4] in column has the same member. (duplicate members)
