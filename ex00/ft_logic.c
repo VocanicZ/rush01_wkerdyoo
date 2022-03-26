@@ -28,7 +28,7 @@ int ft_atoi(char c)
     return (i);
 }
 
-int ft_pow(int  base, int n)
+int ft_pow(int  base, int n) //not use
 {
     int tmp;
 
@@ -41,7 +41,7 @@ int ft_pow(int  base, int n)
     return (tmp);
 }
 
-int *ft_sqrt(int n)
+int *ft_sqrt(int n) //not use
 {
     int i;
     int *tmp;
@@ -88,7 +88,7 @@ int *split_input(char *str)
     {
         if (str[i] == ' ')
             array[j++] = ft_atoi(str[i - 1]);
-        else if (ft_atoi(str[i]) > k / 4 || ft_atoi(str[i]) == 0)
+        else if (ft_atoi(str[i]) > (k + 1) / 4 || ft_atoi(str[i]) == 0)
         {
             error();
             return (NULL);
