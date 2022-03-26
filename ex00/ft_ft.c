@@ -24,7 +24,10 @@ void print_map(int **map)
         j = -1;
         while (++j < array_size(&map[0][0]))
         {
-            ft_putchar(ft_itoa(map[i][j]));
+            if (map[i][j] == 0)
+                ft_putchar(' ');
+            else
+                ft_putchar(ft_itoa(map[i][j]));
             ft_putchar(' ');
         }
         ft_putchar('\n');
