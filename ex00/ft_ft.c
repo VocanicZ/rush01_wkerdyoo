@@ -28,7 +28,8 @@ void print_board(int **map)
                 ft_putchar(' ');
             else
                 ft_putchar(ft_itoa(map[i][j]));
-            ft_putchar(' ');
+            if (j != array_size(&map[0][0]) - 1)
+                ft_putchar(' ');
         }
         ft_putchar('\n');
     }
