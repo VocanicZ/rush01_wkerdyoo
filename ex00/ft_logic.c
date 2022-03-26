@@ -1,9 +1,12 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 int array_size(int *array)
 {
     int i;
 
     i = 0;
-    while (*array++)
+    while (array[i] != -1)
         i++;
     return (i);
 }
@@ -20,7 +23,7 @@ int ft_atoi(char c)
 {
     int i;
     
-    i = c - 48;
+    i = c - '0';
     return (i);
 }
 
@@ -43,8 +46,9 @@ int *ft_sqrt(int n)
     int *tmp;
 
     i = 1;
-    tmp = (int *) malloc(sizeof(int) * 2);
+    tmp = (int *) malloc(sizeof(int) * 3);
     tmp[1] = 0;
+    tmp[3] = -1;
     while (ft_pow(i, 2) <= n)
     {
         i++;

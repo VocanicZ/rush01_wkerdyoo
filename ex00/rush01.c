@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "ft_ft.c"
-#include "ft_logic.c"
+#include <stdio.h>
 
 int *split_input(char *str)
 {
@@ -16,9 +16,13 @@ int *split_input(char *str)
             j++;
         i++;
     }
-    if (ft_sqrt(j)[1] != 0)
-        return (error());
+    if (ft_sqrt(j)[1] != 1 || j < 3)
+    {
+        error();
+        return (NULL);
+    }
     array = (int *) malloc(sizeof(int) * (j + 1));
+    array[j + 1] = -1; 
     i = 0;
     j = 0;
     while (str[i] != '\0')
@@ -31,14 +35,14 @@ int *split_input(char *str)
     return (array);
 }
 
-#include <stdio.h>
+
 int main(int argv, char **argc)
 {
     int *array_input;
     if (argv == 2)
     {
         array_input = split_input(&argc[1][0]);
-        for(int i=0;i<16;i++)
+        for(int i=0;i<array_size(array_input);i++)
             printf("%d, ", array_input[i]);
         //code here 
     }
