@@ -11,9 +11,9 @@ int main(int argv, char **argc)
         array_input = split_input(&argc[1][0]);
         board = gen_board(array_size(array_input) / 4);
 
-        
+
         //print_map(board);
-        print_map(combine_board_ui(board, array_input));
+        print_board(combine_board_ui(board, array_input));
     }
     else
         return (error());

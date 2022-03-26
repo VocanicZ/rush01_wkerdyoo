@@ -13,7 +13,7 @@ int error(void)
     return (0);
 }
 
-void print_map(int **map)
+void print_board(int **map)
 {
     int i;
     int j;
