@@ -130,7 +130,7 @@ int main(int argv, char **argc)
         print_board(board);
         print_line();
 
-        /*
+        
         i = 0;
         j = 0;
         printf("%d\n",combination_match(board[i], 4, 1, 0));
