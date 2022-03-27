@@ -5,6 +5,7 @@ int  *checkDuplicate(int size, int **board) {
         int i;
         int j;
         int k;
+        int l;
         int *result;
 
         i = 0;
@@ -22,11 +23,13 @@ int  *checkDuplicate(int size, int **board) {
                 {
                     // using for row, col loop 
                     printf("compare %d <-> %d, i=%d,j=%d,k=%d\n", board[i][j], board[k][j], i,j,k);
-                    if (board[i][j] == board[k][j])//board[i][j] == board[i][k] || board[i][j] == board[k][j]) 
+                    if (board[i][j] == board[k][j])
                     {
-                        printf("DUPP!\n");
-                        result[0] = j;
-                        result[1] = board[k][j];
+                        result[0] = board[k][j];
+                        result[2] = j;
+                        while (board[i][j] == board[k][j])//board[i][j] == board[i][k] || board[i][j] == board[k][j]) 
+                            l++;
+                        result[1] = l;
                         return (result);
                     }
                     k++;

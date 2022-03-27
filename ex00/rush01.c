@@ -130,34 +130,26 @@ int main(int argv, char **argc)
         field_condition(board, array_input);
         print_board(board);
         print_line();
-        /*
-        int a[5] = {4,1,2,3,-1};
-        printf("hash -> %d %d\n", hash_array(&a[0])[0], hash_array(&a[0])[1]);
-        */
-        //left to right by row
-        
-        k = -1;
-        while (k == -1 || checkDuplicate(array_size(array_input) / 4, board)[0] != -1)
+        //LAST LOOPING
+        i = -1;
+        while (++i < array_size(array_input) / 4)
         {
-            i = k;
-            while (++i < array_size(array_input) / 4)
+            j = k;
+            tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
+            while (tmp != 0)
             {
-                j = k;
-                tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
-                while (tmp != 0)
-                {
-                    if (tmp == 2)
-                        return (error());
-                    tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], ++j);
-                }
+                if (tmp == 2)
+                    return (error());
+                tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], ++j);
             }
-            k++;
+        } //first fill;
+        while (checkDuplicate(array_size(array_input) / 4, board)[0] != -1)
+        {
+            //code here
         }
-        //printf("found break %d %d\n", checkDuplicate(array_size(array_input) / 4, board));
+        //LAST LOOPING
         print_board(board);
         print_line();
-        //printf("dub = %d, %d\n", checkDuplicate(array_size(array_input) / 4, board)[0], checkDuplicate(array_size(array_input) / 4, board)[1]);
-        //print_line();
         print_board(combine_board_ui(board, array_input));
     }
     else
