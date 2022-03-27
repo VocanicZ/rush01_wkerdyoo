@@ -218,6 +218,22 @@ void    append_array(int **array, int *p)
     array[i + 1][0] = -1;
 }
 
+void    remove_array(int **array, int n)
+{
+    int i;
+
+    i = 0;
+    while (i < n)
+        i++;
+    while (array[i + 1][0] != -1)
+    {
+        array[i] = array[i + 1];
+        i++;
+    }
+    array[i++][0] = -1;
+    free(array[i]);
+}
+
 int ft_factorial(int n)
 {
     int i;
