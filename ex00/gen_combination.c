@@ -15,15 +15,6 @@ int *ft_copy(int *array);
 
 int ft_factorial(int n);
 
-void    print_array(int *array)
-{
-    for (int i = 0; i<array_size(array);i++)
-    {
-        printf("%d ",array[i]);
-    }
-    printf("\n");
-}
-
 void    gen_all_combination(int **big_array, int *array, int index)
 {
     int j;
@@ -66,15 +57,8 @@ int    **gen_combination(int first, int last, int n)
     i = -1;
     while (tmp[++i][0] != -1)
     {
-        printf("<- hash %d %d | ", hash_array(tmp[i])[0], hash_array(tmp[i])[1]);
         if (hash_array(tmp[i])[0] == first && hash_array(tmp[i])[1] == last)
             append_array(all_combination, tmp[i]);
-        printf("\n");
     }
-    printf("------------\n");
-    for (int k=0; all_combination[k][0] != -1;k++){
-        print_array(all_combination[k]);
-    }
-    printf("---------------\n");
     return (all_combination);
 }

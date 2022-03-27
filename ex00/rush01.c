@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 void    field_condition(int **board, int *condition);
@@ -15,14 +14,9 @@ int **gen_combination(int first, int last, int n);
 
 int ft_atoi(char c);
 
-int combination_match(int *array, int first, int last, int n);
+int combination_match(int *array, int *template, int first, int last, int n);
 
 int *checkDuplicate(int size, int **board);
-
-void    print_line(void)
-{
-    printf("-------------------------------------\n");
-}
 
 int *split_input(char *str)
 {
@@ -31,16 +25,16 @@ int *split_input(char *str)
     int j;
     int k;
 
-    i = 0;
+    i = 0;;
     j = 0;
     k = 0;
     while (str[i] != '\0')
     {
         if (str[i] == ' ')
-            k++;
+            k++;;
         i++;
     }
-    if ((k + 1) % 4 != 0)
+    if ((k + 1) % 4 != 0 && k > 14)
     {
         error();
         return (NULL);
@@ -111,43 +105,67 @@ int **combine_board_ui(int **board, int *ui)
     }
     return (ui_board);
 }
+#include <stdio.h>
+void    print_line(void)
+{
+    printf("-------------------------------------\n");
+}
 
 int main(int argv, char **argc)
 {
     int **board;
+    int **tmp_board;
     int *array_input;
     int i;
     int j;
     int tmp;
     int k;
+    int l;
+    int *prt;
     if (argv == 2)
     {
         array_input = split_input(&argc[1][0]);
         board = gen_board(array_size(array_input) / 4);
+        tmp_board = gen_board(array_size(array_input) / 4);
         print_line();
         print_board(board);
         print_line();
         field_condition(board, array_input);
+        field_condition(tmp_board, array_input);
         print_board(board);
         print_line();
-        //LAST LOOPING
         i = -1;
         while (++i < array_size(array_input) / 4)
         {
-            j = k;
-            tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
+            j = 0;
+            tmp = combination_match(board[i], tmp_board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
             while (tmp != 0)
             {
                 if (tmp == 2)
                     return (error());
-                tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], ++j);
+                tmp = combination_match(board[i], tmp_board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], ++j);
             }
-        } //first fill;
-        while (checkDuplicate(array_size(array_input) / 4, board)[0] != -1)
-        {
-            //code here
         }
-        //LAST LOOPING
+        print_board(board);
+
+        print_line();
+        i = 0;
+        j = 0;
+        tmp = combination_match(board[i], tmp_board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
+        while (i < array_size(array_input) / 4)
+        {
+            printf("i %d j %d\n", i, j);
+            tmp = combination_match(board[i], tmp_board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
+            printf("tmp = %d\n", tmp);
+            if (tmp == 3 || tmp == 1)
+                j++;
+            else if (tmp == 2 || tmp == 0)
+            {
+                i++;
+                j = 0;
+            }
+        }
+
         print_board(board);
         print_line();
         print_board(combine_board_ui(board, array_input));
