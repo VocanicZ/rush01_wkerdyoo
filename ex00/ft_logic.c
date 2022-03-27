@@ -147,3 +147,85 @@ int **combine_board_ui(int **board, int *ui)
     }
     return (ui_board);
 }
+
+int *hash_array(int *array)
+{
+    int *hash;
+    int max;
+    int r_max;
+    int i;
+
+    i = -1;
+    hash = (int *) malloc(sizeof(int) * 3);
+    hash[0] = 1;
+    hash[1] = 1;
+    hash[2] = -1;
+    while (++i < array_size(array))
+    {
+        if (i == 0)
+        {
+            max = array[0];
+            r_max = array[array_size(array) - 1];
+        }
+        else 
+        {
+            if (array[i] > max)
+            {
+                hash[0]++;
+                max = array[i];
+            }
+            if (array[array_size(array) - i] > r_max)
+            {
+                hash[1]++;
+                r_max = array[array_size(array) - i];
+            }
+        }
+    }
+    return (hash);
+}
+
+int *ft_copy(int *array)
+{
+    int *tmp;
+    int i;
+
+    tmp = (int *) malloc(sizeof(int) * (array_size(array) + 1));
+    tmp[array_size(array)] = -1;
+    i = -1;
+    while (++i < array_size(array))
+        tmp[i] = array[i];
+    return (tmp);
+}
+
+void    ft_swap(int *a, int *b)
+{
+    int tmp;
+
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+void    append_array(int **array, int *p)
+{
+    int i;
+
+    i = 0;
+    while (array[i][0] != -1)
+        i++;
+    array[i] = p;
+    array[i + 1] = (int *) malloc(sizeof(int) * (array_size(array[i]) + 1));
+    array[i + 1][0] = -1;
+}
+
+int ft_factorial(int n)
+{
+    int i;
+    int fac;
+
+    i = n;
+    fac = 1;
+    while (i > 0)
+        fac *= i--;   
+    return (fac);
+}
