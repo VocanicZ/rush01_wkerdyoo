@@ -43,6 +43,7 @@ void    gen_all_combination(int **big_array, int *array, int index)
 int    **gen_combination(int first, int last, int n)
 {
     int **all_combination;
+    int **tmp;
     int *gen;
     int i;
 
@@ -51,24 +52,24 @@ int    **gen_combination(int first, int last, int n)
     while (++i < n)
         gen[i] = i + 1;
     gen[n] = -1;
-    all_combination = (int **) malloc(sizeof(int *) * (ft_factorial(n) + 1));
+    tmp = (int **) malloc(sizeof(int *) * (ft_factorial(n) + 1));
+    tmp[0] = (int *) malloc(sizeof(int) * (n + 1));
+    tmp[0][0] = -1;
+    gen_all_combination(tmp, gen, 0);
+    free(gen);
+    i = 0;
+    while (tmp[i][0] != -1)
+        i++;
+    all_combination = (int **) malloc(sizeof(int *) * (i + 1));
     all_combination[0] = (int *) malloc(sizeof(int) * (n + 1));
     all_combination[0][0] = -1;
-    gen_all_combination(all_combination, gen, 0);
-    free(gen);
     i = -1;
-    while (all_combination[++i][0] != -1)
+    while (tmp[++i][0] != -1)
     {
-        //printf("checking ->");
-        //print_array(all_combination[i]);
-        //printf("<- hash %d %d | ", hash_array(all_combination[i])[0], hash_array(all_combination[i])[1]);
-        if (!(hash_array(all_combination[i])[0] == first && hash_array(all_combination[i])[1] == last))
-        {
-            //printf(" found");
-            remove_array(all_combination, i);
-            i--;
-        }
-        //printf("\n");
+        printf("<- hash %d %d | ", hash_array(tmp[i])[0], hash_array(tmp[i])[1]);
+        if (hash_array(tmp[i])[0] == first && hash_array(tmp[i])[1] == last)
+            append_array(all_combination, tmp[i]);
+        printf("\n");
     }
     printf("------------\n");
     for (int k=0; all_combination[k][0] != -1;k++){

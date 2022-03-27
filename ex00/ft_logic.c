@@ -138,13 +138,13 @@ void    remove_array(int **array, int n) //array store [[],[],[],[-1],[-1]]
     int i;
 
     i = n;
-    while (array[i + 1][0] != -1)
-    {
-        array[i] = array[i + 1];
-        i++;
+    while (array[i + 1][0] != -1) // 0+1  |
+    { 
+        array[i] = array[i + 1]; // 0 = 0+1
+        array[i]++;                   //0++
     }
-    array[i++][0] = -1;
-    free(array[i]);
+    array[i][0] = -1;
+    //free(array[i]);
 }
 
 int ft_factorial(int n)
