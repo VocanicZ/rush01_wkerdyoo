@@ -15,6 +15,10 @@ int **gen_combination(int first, int last, int n);
 
 int ft_atoi(char c);
 
+int combination_match(int *array, int first, int last, int n);
+
+int *checkDuplicate(int size, int **board);
+
 void    print_line(void)
 {
     printf("-------------------------------------\n");
@@ -112,6 +116,9 @@ int main(int argv, char **argc)
 {
     int **board;
     int *array_input;
+    int i;
+    int j;
+    int tmp;
     if (argv == 2)
     {
         array_input = split_input(&argc[1][0]);
@@ -122,8 +129,27 @@ int main(int argv, char **argc)
         field_condition(board, array_input);
         print_board(board);
         print_line();
-        printf("looking for hash %d %d\n", 1, 2);
-        gen_combination(1, 2, array_size(array_input) / 4);
+
+        /*
+        i = 0;
+        j = 0;
+        printf("%d\n",combination_match(board[i], 4, 1, 0));
+        //left to right by row
+        /*
+        i = -1;
+        while (++i < array_size(array_input) / 4)
+        {
+            j = 0;
+            tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], j);
+            while (tmp != 0)
+            {
+                if (tmp == 2)
+                    return (error());
+                tmp = combination_match(board[i], array_input[array_size(array_input) / 2 + i], array_input[array_size(array_input) / 4 * 3 + i], ++j);
+            }
+        }
+        printf("found break %d %d\n", checkDuplicate(array_size(array_input) / 4, board));*/
+        print_board(board);
         print_line();
         print_board(combine_board_ui(board, array_input));
     }

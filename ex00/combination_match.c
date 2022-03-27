@@ -2,6 +2,8 @@ int array_size(int *array);
 
 int **gen_combination(int first, int last, int n);
 
+void    print_array(int *array);
+#include <stdio.h>
 int combination_match(int *array, int first, int last, int n)
 {
     int i;
@@ -10,9 +12,12 @@ int combination_match(int *array, int first, int last, int n)
     //match each row with 1st combination that cat fit with **map
     i = -1;
     j = 0;
-    combination = gen_combination(first, last, array_size(array)); 
-    while (combination[i][0] != 0)
+    combination = gen_combination(first, last, array_size(array));
+    while (combination[++i][0] != 0)
+    {
+        print_array(combination[i]);
         j++;
+    }
     if (n > j)
         return (2);
     i = -1;

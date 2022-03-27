@@ -48,15 +48,19 @@ int    **gen_combination(int first, int last, int n)
 
     i = -1;
     gen = (int *) malloc(sizeof(int) * (n + 1));
-    gen[n] = -1;
     while (++i < n)
         gen[i] = i + 1;
+    gen[n] = -1;
     all_combination = (int **) malloc(sizeof(int *) * (ft_factorial(n) + 1));
     all_combination[0] = (int *) malloc(sizeof(int) * (n + 1));
     all_combination[0][0] = -1;
     gen_all_combination(all_combination, gen, 0);
     free(gen);
     i = -1;
+    for (int k=0; all_combination[k][0] != -1;k++){
+        print_array(all_combination[k]);
+    }
+    printf("------\n");
     while (all_combination[++i][0] != -1)
     {
         if (!(hash_array(all_combination[i])[0] == first && hash_array(all_combination[i])[1] == last))
