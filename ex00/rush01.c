@@ -14,6 +14,10 @@ int **combine_board_ui(int **board, int *ui);
 
 int error(void);
 
+int *hash_array(int *array);
+
+int **gen_combination(int first, int last, int n);
+
 void    print_line(void)
 {
     printf("-------------------------------------\n");
@@ -32,6 +36,9 @@ int main(int argv, char **argc)
         print_line();
         field_condition(board, array_input);
         print_board(board);
+        print_line();
+        printf("looking for hash %d %d\n", array_input[0], array_input[array_size(array_input) / 4]);
+        gen_combination(array_input[0], array_input[array_size(array_input) / 4], array_size(array_input) / 4);
         print_line();
         print_board(combine_board_ui(board, array_input));
     }
