@@ -60,94 +60,6 @@ int *ft_sqrt(int n) //not use
     return (tmp);
 }
 
-int *split_input(char *str)
-{
-    int *array; 
-    int i;
-    int j;
-    int k;
-
-    i = 0;
-    j = 0;
-    k = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == ' ')
-            k++;
-        i++;
-    }
-    if ((k + 1) % 4 != 0)
-    {
-        error();
-        return (NULL);
-    }
-    array = (int *) malloc(sizeof(int) * (k + 2));
-    array[k + 1] = -1; 
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == ' ')
-            array[j++] = ft_atoi(str[i - 1]);
-        else if (ft_atoi(str[i]) > (k + 1) / 4 || ft_atoi(str[i]) == 0)
-        {
-            error();
-            return (NULL);
-        }
-        i++;
-    }
-    array[j] = ft_atoi(str[i - 1]);
-    return (array);
-}
-
-int **gen_board(int n)
-{
-    int i;
-    int j;
-    int **board;
-
-    i = 0;
-    board = (int **) malloc(sizeof(int *) * (n));
-    while (i < n)
-    {
-        board[i] = (int *) malloc(sizeof(int) * (n + 1));
-        j = 0;
-        while (j < n)
-            board[i][j++] = 0;
-        board[i++][n] = -1;
-    }
-    return (board);
-}
-
-int **combine_board_ui(int **board, int *ui)
-{
-    int **ui_board;
-    int i;
-    int j;
-    int pos[3];
-
-    ui_board = gen_board(array_size(ui) / 4 + 2);
-    i = -1;
-    pos[0] = 0;
-    pos[1] = array_size(ui) / 2;
-    pos[2] = array_size(ui) * 3 / 4;
-    while (++i < array_size(ui) / 4 + 2)
-    {
-        j = -1;
-        while (++j < array_size(ui) / 4 + 2)
-        {
-            if ((i == 0 || i == array_size(ui) / 4 + 1) && j > 0 && j < array_size(ui) / 4 + 1)
-                ui_board[i][j] = ui[pos[0]++];
-            else if (j == 0 && i > 0 && i < array_size(ui) / 4 + 1)
-                ui_board[i][j] = ui[pos[1]++];
-            else if (j == array_size(ui) / 4 + 1 && i > 0 && i < array_size(ui) / 4 + 1)
-                ui_board[i][j] = ui[pos[2]++];
-            else if ((i > 0 && i < array_size(ui) / 4 + 1) && j > 0 && j < array_size(ui) / 4 + 1)
-                ui_board[i][j] = board[i - 1][j - 1];
-        }
-    }
-    return (ui_board);
-}
-
 int *hash_array(int *array)
 {
     int *hash;
@@ -165,7 +77,7 @@ int *hash_array(int *array)
         if (i == 0)
         {
             max = array[0];
-            r_max = array[array_size(array) - 1];
+            r_max = array[array_size(array)];
         }
         else 
         {
@@ -222,16 +134,15 @@ void    remove_array(int **array, int n)
 {
     int i;
 
-    i = 0;
-    while (i < n)
-        i++;
+    i = n;
     while (array[i + 1][0] != -1)
     {
         array[i] = array[i + 1];
         i++;
     }
-    array[i++][0] = -1;
-    free(array[i]);
+    array[i] = array[i + 1];
+    array[i + 1][0] = -1;
+    //free(array[i]);
 }
 
 int ft_factorial(int n)

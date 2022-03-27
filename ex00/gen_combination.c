@@ -45,7 +45,6 @@ int    **gen_combination(int first, int last, int n)
     int **all_combination;
     int *gen;
     int i;
-    int j;
 
     i = -1;
     gen = (int *) malloc(sizeof(int) * (n + 1));
@@ -58,14 +57,12 @@ int    **gen_combination(int first, int last, int n)
     gen_all_combination(all_combination, gen, 0);
     free(gen);
     i = -1;
-    j = 0;
-    while (++i < ft_factorial(n) - j)
+    while (all_combination[++i][0] != -1)
     {
         if (!(hash_array(all_combination[i])[0] == first && hash_array(all_combination[i])[1] == last))
         {
             remove_array(all_combination, i);
             i--;
-            j++;
         }
     }
     for (int k=0; all_combination[k][0] != -1;k++){
