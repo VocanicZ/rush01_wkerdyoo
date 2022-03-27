@@ -13,17 +13,16 @@ int combination_match(int *array, int first, int last, int n)
     i = -1;
     j = 0;
     combination = gen_combination(first, last, array_size(array));
-    while (combination[++i][0] != 0)
-    {
-        print_array(combination[i]);
+    while (combination[++i][0] != -1)
         j++;
-    }
+    printf("n =%d, j = %d\n", n, j);
     if (n > j)
         return (2);
     i = -1;
+    j = 0;
     while (++i < array_size(array))
     {
-        if (!(array[i] == 0 || array[i] == combination[n][i]))
+        if (array[i] == 0 || array[i] == combination[n][i])
             j++;
     }
     if (j != array_size(array)) 

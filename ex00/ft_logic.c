@@ -59,7 +59,7 @@ int *ft_sqrt(int n) //not use
         tmp[1] = 1;
     return (tmp);
 }
-
+#include <stdio.h>
 int *hash_array(int *array)
 {
     int *hash;
@@ -72,12 +72,14 @@ int *hash_array(int *array)
     hash[0] = 1;
     hash[1] = 1;
     hash[2] = -1;
+    //printf("size = %d\n", array_size(array));
     while (++i < array_size(array))
     {
         if (i == 0)
         {
             max = array[0];
-            r_max = array[array_size(array)];
+            r_max = array[array_size(array) - 1];
+            //printf("rmax = %d\n", r_max);
         }
         else 
         {
@@ -86,10 +88,10 @@ int *hash_array(int *array)
                 hash[0]++;
                 max = array[i];
             }
-            if (array[array_size(array) - i] > r_max)
+            if (array[array_size(array) - i - 1] > r_max)
             {
                 hash[1]++;
-                r_max = array[array_size(array) - i];
+                r_max = array[array_size(array) - i - 1];
             }
         }
     }
@@ -136,18 +138,13 @@ void    remove_array(int **array, int n) //array store [[],[],[],[-1],[-1]]
     int i;
 
     i = n;
-    //printf("i = %d", i + 1);
-    //print_array(array[i + 1]);
     while (array[i + 1][0] != -1)
     {
-        //printf("i = %d", i + 1);
-        //print_array(array[i + 1]);
         array[i] = array[i + 1];
         i++;
     }
-    //array[i] = array[i + 1];
-    array[i][0] = -1;
-    //free(array[i]);
+    array[i++][0] = -1;
+    free(array[i]);
 }
 
 int ft_factorial(int n)
